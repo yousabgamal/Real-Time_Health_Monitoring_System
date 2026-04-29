@@ -1,13 +1,13 @@
 #include "main.h"
 
-static const char* MY_BELT_ID = "BELT_A001";
+static const char* MY_BELT_ID = "belt_id";
 static bool ret_val = true , handshakeDone = false;
 static float accX = 0.0 , accY = 0.0 , accZ = 0.0 , Temp_Val = 0.0 , Heart_Rate = 0.0 ;
 static uint8 SPo2_Ratio = 0;
 static uint16 GSR_Val = 0;
 
-const char* ssid = "Yousab Gamal";
-const char* password = "ygm112004";
+const char* ssid = "network_name";
+const char* password = "network_password";
 
 WebSocketsClient webSocket;
 
@@ -75,7 +75,7 @@ void setup() {
   }
   Serial.println("\n Connected.");
 
-  webSocket.beginSSL("vitalink20251014200825.azurewebsites.net", 443, "/sensorhub");
+  webSocket.beginSSL("domain_name", "port_number", "endpoint");
   webSocket.onEvent(webSocketEvent);
   xTaskCreatePinnedToCore(
   HeartRateTask,       
@@ -95,7 +95,7 @@ void webSocketEvent(WStype_t type, uint8 * payload, size_t length)
       Serial.println(" Connected to SignalR Hub.");
       webSocket.sendTXT("{\"protocol\":\"json\",\"version\":1}\x1e");
       break;
-
+ 
     case WStype_TEXT:
       Serial.printf(" Message: %s\n", payload);
       if (strstr((char*)payload, "{}") || strstr((char*)payload, "{\"type\":1}")) 
