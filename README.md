@@ -57,6 +57,6 @@ All sensors are connected to and controlled by the **ESP32-S3**, which reads, pr
 ## Setup & Usage
 1. Clone the repository:
 ```bash
-git clone https://github.com/yousabgamal/Athletic_Belt.git
+git clone https://github.com/yousabgamal/Real-Time_Health_Monitoring_System.git
 
 
